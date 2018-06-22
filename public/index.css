@@ -1,0 +1,27 @@
+nav{
+  height: 60px;
+  background: black;
+  display: flex;
+  justify-content: space-between ;
+}
+
+
+nav span{
+  color: white;
+  font-size: 45px;
+  margin-left: 10px;
+}
+
+button{
+  text-align: right;
+}
+
+
+
+.mycard{
+  margin:1%;
+  width: 30%;
+  display: flex;
+  float: left;
+  background-color: rgb(220,330,360);
+}

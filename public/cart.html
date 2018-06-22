@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>CART</title>
+      <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+      <style>
+           h1{
+             text-align: center;
+             font-size: 70px;
+             font-weight: 600;
+             font-family: "Lucida Console", Monaco, monospace;
+            }
+            .promoCode{
+               /* background: #81ca9c;  */
+              width: 250px;
+              border: 1px solid grey;
+              margin-left: 50px;
+            }
+            button{
+              background:  #81ca9c;
+            }
+
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>CART <i class="fas fa-shopping-cart"></i></h1>
+    </header>
+    <main></main>
+<!--
+    <div class="promoCode">
+      <label for="code">Have a promo code?</label><br>
+      <input type="text" name="code">
+      <input type="submit">
+    </div> -->
+
+    <button onclick=" window.location= '/' ">BACK TO PRODUCTS</button>
+
+  </body>
+  <script type="text/javascript">
+       function bringItems(){
+           $.get('/api/cart',function(data){
+            if(data.length==0){
+                body.html($("<h1>Sorry no Item is present in the cart. </h1>"))
+            }
+            else{
+              console.log(data)
+            let body=  $('<table class="table table-striped"><thead><tr><th scope="col">#</th><th scope="col">NAME</th><th scope="col">MANUFACTURER</th><th scope="col">PRICE</th><th scope="col">QUANTITY</th><th scope="col">TOTAL</th></tr></thead></table><tbody></tbody>')
+            $('main').append(body);
+                 data.forEach(function(item,index){
+                   let total=item.quantity*item.productPrice;
+                     // $('body').append($(`('<tr><th scope="row">${index+1}</th>  <td>${item.name}</td> <td>${item.price}</td> <td>${item.quantity}</td> <td>${item.manufacturer}</td>')`));
+                   let row= $(`<tr><th scope="row">${index+1}</th>  <td>${item.productName}</td> <td>${item.productManufacturer}</td> <td>${item.productPrice}</td> <td>${item.quantity}</td><td>${total}</td><td> </td>`);
+                   $('table').append(row);
+                 });
+             }
+             })
+// <i class="fas fa-trash"></i>
+       }
+       bringItems();
+
+
+
+  </script>
+</html>
